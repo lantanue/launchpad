@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 export default function ProjectForm({ project, onSave, onClose }) {
   const [name, setName] = useState(project?.name ?? '')
   const [desc, setDesc] = useState(project?.desc ?? '')
+  const [url, setUrl] = useState(project?.url ?? '')
 
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && onClose()
@@ -13,7 +14,7 @@ export default function ProjectForm({ project, onSave, onClose }) {
   const submit = (e) => {
     e.preventDefault()
     if (!name.trim()) return
-    onSave({ name: name.trim(), desc: desc.trim() })
+    onSave({ name: name.trim(), desc: desc.trim(), url: url.trim() })
   }
 
   return (
@@ -33,6 +34,13 @@ export default function ProjectForm({ project, onSave, onClose }) {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           rows={3}
+        />
+        <input
+          className="field"
+          placeholder="Ссылка (необязательно)"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          type="url"
         />
         <div className="modal-actions">
           <button type="button" className="btn-ghost" onClick={onClose}>Отмена</button>

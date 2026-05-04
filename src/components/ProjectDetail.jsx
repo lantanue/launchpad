@@ -21,6 +21,11 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
         <span className="card-label">Project</span>
         <h1 className="detail-title">{project.name}</h1>
         {project.desc && <p className="detail-desc">{project.desc}</p>}
+        {project.url && (
+          <a className="project-link" href={project.url} target="_blank" rel="noreferrer">
+            {project.url}
+          </a>
+        )}
       </div>
 
       <div className="tasks">
