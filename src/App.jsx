@@ -3,6 +3,7 @@ import { useLocalStorage } from './hooks/useLocalStorage'
 import ProjectCard from './components/ProjectCard'
 import ProjectDetail from './components/ProjectDetail'
 import ProjectForm from './components/ProjectForm'
+import Logo from './assets/logo.svg'
 
 const uid = () => Math.random().toString(36).slice(2)
 
@@ -20,9 +21,7 @@ const TIPS = [
   "When in doubt, remove something. Clarity lives in simplicity.",
   "Talk to one real user. It's worth more than a week of assumptions.",
   "Rest is part of the process. Boredom is where ideas live.",
-  "Copy shamelessly to learn, then throw it all away.",
   "The version you ship teaches you more than the one you planned.",
-  "Constraints are a gift. Work with them, not against them.",
 ]
 
 function useTip() {
@@ -84,7 +83,7 @@ export default function App() {
         ) : (
           <>
             <div className="intro">
-              <div className="flower">✳</div>
+              <img src={Logo} alt="logo" className="logo" />
               <p className="date">{today}</p>
               <p className="tip">{tip}</p>
             </div>
