@@ -84,7 +84,6 @@ export default function App() {
           <>
             <div className="intro">
               <img src={Logo} alt="logo" className="logo" />
-              <p className="date">{today}</p>
               <p className="tip">{tip}</p>
             </div>
 
