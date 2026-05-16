@@ -20,6 +20,7 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
   const [text, setText] = useState('')
   const [tag, setTag] = useState('')
   const [url, setUrl] = useState(project.url ?? '')
+  const [editingUrl, setEditingUrl] = useState(false)
 
   const submit = (e) => {
     e.preventDefault()
@@ -51,24 +52,25 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
         {project.desc && <p className="detail-desc">{project.desc}</p>}
 
         <div className="url-field-wrap">
-          <Input
-            className="font-mono text-sm h-10 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1 px-[10px]"
-            placeholder="Paste project link..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            onBlur={saveUrl}
-            onKeyDown={(e) => e.key === 'Enter' && saveUrl()}
-            type="url"
-          />
-          {url && (
-            <a
-              className="url-open"
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {shortUrl(url)} ↗
-            </a>
+          {editingUrl ? (
+            <Input
+              className="font-mono text-sm h-10 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1 px-[10px]"
+              placeholder="Paste project link..."
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              onBlur={() => { saveUrl(); setEditingUrl(false) }}
+              onKeyDown={(e) => { if (e.key === 'Enter') { saveUrl(); setEditingUrl(false) } if (e.key === 'Escape') setEditingUrl(false) }}
+              type="url"
+              autoFocus
+            />
+          ) : (
+            <div className="url-row">
+              {url
+                ? <a className="url-open" href={url} target="_blank" rel="noreferrer">{shortUrl(url)} ↗</a>
+                : <span className="url-empty">no link</span>
+              }
+              <button className="icon-btn" onClick={() => setEditingUrl(true)}>✎</button>
+            </div>
           )}
         </div>
       </div>

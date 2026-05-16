@@ -212,21 +212,23 @@ main {
   color: #888;
 }
 
-.url-field-wrap {
+.url-field-wrap { display: flex; flex-direction: column; gap: 6px; }
+
+.url-row {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
 }
 
 .url-open {
-  font-size: 12px;
+  font-size: 13px;
   color: #bbb;
   text-decoration: none;
-  padding-left: 10px;
   transition: color 0.15s;
-  align-self: flex-start;
 }
 .url-open:hover { color: #555; }
+
+.url-empty { font-size: 13px; color: #ddd; }
 
 /* ── Tasks ── */
 
