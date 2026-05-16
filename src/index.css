@@ -103,7 +103,7 @@ main {
   transition: background 0.12s;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: space-between;
   min-height: 160px;
   text-align: left;
 }
@@ -140,12 +140,17 @@ main {
   transition: opacity 0.2s;
 }
 
+.card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
 .card-actions {
   display: flex;
   gap: 2px;
   opacity: 0;
   transition: opacity 0.15s;
-  align-self: flex-end;
 }
 
 /* Add card */

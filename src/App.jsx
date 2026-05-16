@@ -88,10 +88,11 @@ export default function App() {
             </div>
 
             <div className="cards">
-              {projects.map((p) => (
+              {projects.map((p, i) => (
                 <ProjectCard
                   key={p.id}
                   project={p}
+                  index={i + 1}
                   taskCount={tasks.filter((t) => t.projectId === p.id).length}
                   onClick={() => setActiveId(p.id)}
                   onEdit={() => setForm(p)}
