@@ -1,6 +1,23 @@
 import { useState } from 'react'
 import TaskItem from './TaskItem'
 
+const today = new Date().toLocaleDateString('en-US', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+})
+
+function shortUrl(url) {
+  try {
+    const u = new URL(url)
+    if (u.protocol === 'file:') {
+      const parts = decodeURIComponent(u.pathname).split('/')
+      return parts[parts.length - 1] || url
+    }
+    return u.hostname + (u.pathname !== '/' ? u.pathname : '')
+  } catch {
+    return url
+  }
+}
+
 export default function ProjectDetail({ project, tasks, onBack, onAddTask, onToggleTask, onDeleteTask, onEditTask }) {
   const [text, setText] = useState('')
   const [tag, setTag] = useState('')
@@ -17,21 +34,23 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
 
   return (
     <div className="detail">
+      <p className="detail-date">{today}</p>
+
       <button className="back-btn" onClick={onBack}>← Back</button>
 
       <div className="detail-header">
-        <span className="card-label">Project</span>
+        <span className="detail-label">Project</span>
         <h1 className="detail-title">{project.name}</h1>
         {project.desc && <p className="detail-desc">{project.desc}</p>}
         {project.url && (
           <a className="project-link" href={project.url} target="_blank" rel="noreferrer">
-            {project.url}
+            {shortUrl(project.url)}
           </a>
         )}
       </div>
 
       <div>
-        <p className="tasks-label">{done}/{tasks.length} done</p>
+        <p className="tasks-label">{done} / {tasks.length} done</p>
         <div className="tasks">
           {tasks.length === 0 && (
             <p className="empty">No tasks yet. Add one below.</p>
@@ -61,7 +80,7 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
           value={tag}
           onChange={(e) => setTag(e.target.value)}
         />
-        <button type="submit" className="btn-primary">Add</button>
+        <button type="submit" className="btn-add">+</button>
       </form>
     </div>
   )
