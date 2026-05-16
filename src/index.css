@@ -245,43 +245,65 @@ main {
 .task {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 16px;
+  padding: 14px 0;
   border-bottom: 1px solid #f0f0ee;
   font-size: 16px;
   line-height: 24px;
   color: #222;
+  cursor: pointer;
 }
 
 .task:last-child { border-bottom: none; }
 .task.done .task-text { color: #ccc; text-decoration: line-through; }
 
+.task-check {
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid #d5d5d2;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.task-check:hover { border-color: #aaa; }
+.task.done .task-check {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
 .task-text { flex: 1; }
 
 .task-tag {
   font-size: 13px;
-  color: #ccc;
+  color: #bbb;
   letter-spacing: 0.03em;
   flex-shrink: 0;
 }
 
 .task-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s; }
 .task:hover .task-actions { opacity: 1; }
-.task.editing { gap: 8px; }
+.task.editing { gap: 8px; cursor: default; }
 
 /* ── Task add form ── */
 
-.task-form { display: flex; gap: 8px; margin-top: 4px; }
-.task-form .tag-field { width: 80px; flex-shrink: 0; }
+.task-form { display: flex; gap: 8px; margin-top: 8px; }
 
 .btn-add {
   background: #111;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
   font-family: inherit;
   cursor: pointer;
   flex-shrink: 0;
