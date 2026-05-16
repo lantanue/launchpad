@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import TaskItem from './TaskItem'
 
 const today = new Date().toLocaleDateString('en-US', {
@@ -36,7 +38,14 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
     <div className="detail">
       <p className="detail-date">{today}</p>
 
-      <button className="back-btn" onClick={onBack}>← Back</button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={onBack}
+        className="back-btn self-start font-mono text-[11px] uppercase tracking-wider text-[#aaa] hover:text-[#555] hover:bg-transparent px-0"
+      >
+        ← Back
+      </Button>
 
       <div className="detail-header">
         <span className="detail-label">Project</span>
@@ -68,19 +77,24 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
       </div>
 
       <form className="task-form" onSubmit={submit}>
-        <input
-          className="field"
+        <Input
+          className="font-mono text-xs"
           placeholder="New task"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <input
-          className="field tag-field"
+        <Input
+          className="font-mono text-xs w-20 shrink-0"
           placeholder="tag"
           value={tag}
           onChange={(e) => setTag(e.target.value)}
         />
-        <button type="submit" className="btn-add">+</button>
+        <Button
+          type="submit"
+          className="font-mono text-lg w-9 h-9 p-0 shrink-0"
+        >
+          +
+        </Button>
       </form>
     </div>
   )

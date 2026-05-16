@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 export default function ProjectForm({ project, onSave, onClose }) {
   const [name, setName] = useState(project?.name ?? '')
   const [desc, setDesc] = useState(project?.desc ?? '')
   const [url, setUrl] = useState(project?.url ?? '')
-
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
 
   const submit = (e) => {
     e.preventDefault()
@@ -18,35 +21,47 @@ export default function ProjectForm({ project, onSave, onClose }) {
   }
 
   return (
-    <div className="overlay" onClick={onClose}>
-      <form className="modal" onClick={(e) => e.stopPropagation()} onSubmit={submit}>
-        <p className="modal-title">{project ? 'Edit project' : 'New project'}</p>
-        <input
-          className="field"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          autoFocus
-        />
-        <textarea
-          className="field"
-          placeholder="Description"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          rows={3}
-        />
-        <input
-          className="field"
-          placeholder="Link (optional)"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          type="url"
-        />
-        <div className="modal-actions">
-          <button type="button" className="btn-ghost" onClick={onClose}>Cancel</button>
-          <button type="submit" className="btn-primary">Save</button>
-        </div>
-      </form>
-    </div>
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="font-mono max-w-sm">
+        <DialogHeader>
+          <DialogTitle className="text-sm font-normal">
+            {project ? 'Edit project' : 'New project'}
+          </DialogTitle>
+        </DialogHeader>
+        <form onSubmit={submit} className="flex flex-col gap-3 mt-1">
+          <Input
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="font-mono text-xs"
+            autoFocus
+          />
+          <Textarea
+            placeholder="Description"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+            rows={3}
+            className="font-mono text-xs resize-none"
+          />
+          <Input
+            placeholder="Link (optional)"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            type="url"
+            className="font-mono text-xs"
+          />
+          <div className="flex justify-end gap-2 mt-1">
+            <Button type="button" variant="outline" size="sm" onClick={onClose}
+              className="font-mono text-xs uppercase tracking-wider">
+              Cancel
+            </Button>
+            <Button type="submit" size="sm"
+              className="font-mono text-xs uppercase tracking-wider">
+              Save
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }

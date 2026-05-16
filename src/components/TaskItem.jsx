@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
   const [editing, setEditing] = useState(false)
@@ -13,15 +16,15 @@ export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
   if (editing) {
     return (
       <div className="task editing">
-        <input
-          className="field inline"
+        <Input
+          className="field inline font-mono text-xs"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') save(); if (e.key === 'Escape') setEditing(false) }}
           autoFocus
         />
-        <input
-          className="field inline tag-field"
+        <Input
+          className="field inline tag-field font-mono text-xs"
           value={tag}
           onChange={(e) => setTag(e.target.value)}
           placeholder="tag"
@@ -34,9 +37,11 @@ export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
 
   return (
     <div className={`task${task.done ? ' done' : ''}`}>
-      <button className="task-check" onClick={onToggle}>
-        {task.done ? '✓' : ''}
-      </button>
+      <Checkbox
+        checked={task.done}
+        onCheckedChange={onToggle}
+        className="rounded-[2px] border-[#d5d5d2] data-[state=checked]:bg-[#111] data-[state=checked]:border-[#111]"
+      />
       <span className="task-text">{task.text}</span>
       {task.tag && <span className="task-tag">{task.tag}</span>}
       <div className="task-actions">
