@@ -112,6 +112,12 @@ main {
 .card:hover .card-desc { opacity: 1; }
 .card:hover .card-actions { opacity: 1; }
 
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .card-stat {
   font-size: 32px;
   line-height: 1;
@@ -119,17 +125,33 @@ main {
   font-weight: 400;
 }
 
-.card-body {
+.card-bottom {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
 }
 
 .card-name {
   font-size: 16px;
   line-height: 24px;
-  color: #555;
+  color: #333;
+}
+
+.card-link {
+  font-size: 12px;
+  line-height: 18px;
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-link:hover { color: #555; }
+
+.card-link-empty {
+  font-size: 12px;
+  color: #ddd;
 }
 
 .card-desc {
@@ -138,12 +160,6 @@ main {
   color: #aaa;
   opacity: 0;
   transition: opacity 0.2s;
-}
-
-.card-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
 }
 
 .card-actions {
