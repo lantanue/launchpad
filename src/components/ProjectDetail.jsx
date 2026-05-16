@@ -36,8 +36,6 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
 
   return (
     <div className="detail">
-      <p className="detail-date">{today}</p>
-
       <Button
         variant="ghost"
         size="sm"
@@ -48,7 +46,6 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
       </Button>
 
       <div className="detail-header">
-        <span className="detail-label">Project</span>
         <h1 className="detail-title">{project.name}</h1>
         {project.desc && <p className="detail-desc">{project.desc}</p>}
         {project.url && (

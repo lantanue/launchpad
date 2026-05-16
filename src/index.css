@@ -176,28 +176,12 @@ main {
 .detail {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
   width: 100%;
   max-width: 600px;
 }
 
-.detail-date {
-  font-size: 13px;
-  line-height: 20px;
-  color: #bbb;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-.detail-header { display: flex; flex-direction: column; gap: 8px; }
-
-.detail-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #bbb;
-}
+.detail-header { display: flex; flex-direction: column; gap: 6px; }
 
 .detail-title {
   font-size: 26px;
