@@ -75,13 +75,13 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
 
       <form className="task-form" onSubmit={submit}>
         <Input
-          className="font-mono text-sm h-12 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1"
+          className="font-mono text-sm h-12 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1 px-[10px]"
           placeholder="New task"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <Input
-          className="font-mono text-sm h-12 w-24 shrink-0 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1"
+          className="font-mono text-sm h-12 w-24 shrink-0 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1 px-[10px]"
           placeholder="tag"
           value={tag}
           onChange={(e) => setTag(e.target.value)}
