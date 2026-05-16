@@ -24,7 +24,7 @@ export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
           className="field inline tag-field"
           value={tag}
           onChange={(e) => setTag(e.target.value)}
-          placeholder="тег"
+          placeholder="tag"
           onKeyDown={(e) => { if (e.key === 'Enter') save(); if (e.key === 'Escape') setEditing(false) }}
         />
         <button className="icon-btn" onClick={save}>✓</button>

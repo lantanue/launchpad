@@ -14,12 +14,11 @@ export default function App() {
   const [projects, setProjects] = useLocalStorage('lp_projects', [])
   const [tasks, setTasks] = useLocalStorage('lp_tasks', [])
   const [activeId, setActiveId] = useState(null)
-  const [form, setForm] = useState(null) // null | 'new' | project object
+  const [form, setForm] = useState(null)
 
   const activeProject = projects.find((p) => p.id === activeId) ?? null
   const activeTasks = tasks.filter((t) => t.projectId === activeId)
 
-  // Projects
   const saveProject = ({ name, desc, url }) => {
     if (form && form.id) {
       setProjects((ps) => ps.map((p) => p.id === form.id ? { ...p, name, desc, url } : p))
@@ -34,7 +33,6 @@ export default function App() {
     setTasks((ts) => ts.filter((t) => t.projectId !== id))
   }
 
-  // Tasks
   const addTask = ({ text, tag }) => {
     setTasks((ts) => [...ts, { id: uid(), projectId: activeId, text, tag, done: false, createdAt: Date.now() }])
   }
@@ -54,7 +52,10 @@ export default function App() {
   return (
     <>
       <main>
-        <p className="date">{today}</p>
+        <div className="header">
+          <p className="header-title">launchpad</p>
+          <p className="date">{today}</p>
+        </div>
 
         {activeProject ? (
           <ProjectDetail
@@ -67,23 +68,21 @@ export default function App() {
             onEditTask={editTask}
           />
         ) : (
-          <div className="home">
-            <div className="cards">
-              {projects.map((p) => (
-                <ProjectCard
-                  key={p.id}
-                  project={p}
-                  taskCount={tasks.filter((t) => t.projectId === p.id).length}
-                  onClick={() => setActiveId(p.id)}
-                  onEdit={() => setForm(p)}
-                  onDelete={() => deleteProject(p.id)}
-                />
-              ))}
-              <button className="card add-card" onClick={() => setForm('new')}>
-                <span className="add-icon">+</span>
-                <span className="add-label">Новый проект</span>
-              </button>
-            </div>
+          <div className="cards">
+            {projects.map((p) => (
+              <ProjectCard
+                key={p.id}
+                project={p}
+                taskCount={tasks.filter((t) => t.projectId === p.id).length}
+                onClick={() => setActiveId(p.id)}
+                onEdit={() => setForm(p)}
+                onDelete={() => deleteProject(p.id)}
+              />
+            ))}
+            <button className="card add-card" onClick={() => setForm('new')}>
+              <span className="add-icon">+</span>
+              <span className="add-label">New project</span>
+            </button>
           </div>
         )}
       </main>

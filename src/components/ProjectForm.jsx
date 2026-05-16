@@ -20,31 +20,31 @@ export default function ProjectForm({ project, onSave, onClose }) {
   return (
     <div className="overlay" onClick={onClose}>
       <form className="modal" onClick={(e) => e.stopPropagation()} onSubmit={submit}>
-        <p className="modal-title">{project ? 'Редактировать проект' : 'Новый проект'}</p>
+        <p className="modal-title">{project ? 'Edit project' : 'New project'}</p>
         <input
           className="field"
-          placeholder="Название"
+          placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           autoFocus
         />
         <textarea
           className="field"
-          placeholder="Описание"
+          placeholder="Description"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           rows={3}
         />
         <input
           className="field"
-          placeholder="Ссылка (необязательно)"
+          placeholder="Link (optional)"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           type="url"
         />
         <div className="modal-actions">
-          <button type="button" className="btn-ghost" onClick={onClose}>Отмена</button>
-          <button type="submit" className="btn-primary">Сохранить</button>
+          <button type="button" className="btn-ghost" onClick={onClose}>Cancel</button>
+          <button type="submit" className="btn-primary">Save</button>
         </div>
       </form>
     </div>
