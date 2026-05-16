@@ -66,6 +66,7 @@ export default function App() {
   const toggleTask = (id) => setTasks((ts) => ts.map((t) => t.id === id ? { ...t, done: !t.done } : t))
   const deleteTask = (id) => setTasks((ts) => ts.filter((t) => t.id !== id))
   const editTask = (id, data) => setTasks((ts) => ts.map((t) => t.id === id ? { ...t, ...data } : t))
+  const editProject = (id, data) => setProjects((ps) => ps.map((p) => p.id === id ? { ...p, ...data } : p))
 
   return (
     <>
@@ -79,6 +80,7 @@ export default function App() {
             onToggleTask={toggleTask}
             onDeleteTask={deleteTask}
             onEditTask={editTask}
+            onEditProject={(data) => editProject(activeId, data)}
           />
         ) : (
           <>

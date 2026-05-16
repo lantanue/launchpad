@@ -3,10 +3,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import TaskItem from './TaskItem'
 
-const today = new Date().toLocaleDateString('en-US', {
-  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-})
-
 function shortUrl(url) {
   try {
     const u = new URL(url)
@@ -20,9 +16,10 @@ function shortUrl(url) {
   }
 }
 
-export default function ProjectDetail({ project, tasks, onBack, onAddTask, onToggleTask, onDeleteTask, onEditTask }) {
+export default function ProjectDetail({ project, tasks, onBack, onAddTask, onToggleTask, onDeleteTask, onEditTask, onEditProject }) {
   const [text, setText] = useState('')
   const [tag, setTag] = useState('')
+  const [url, setUrl] = useState(project.url ?? '')
 
   const submit = (e) => {
     e.preventDefault()
@@ -30,6 +27,10 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
     onAddTask({ text: text.trim(), tag: tag.trim() })
     setText('')
     setTag('')
+  }
+
+  const saveUrl = () => {
+    onEditProject({ url: url.trim() })
   }
 
   const done = tasks.filter(t => t.done).length
@@ -48,11 +49,28 @@ export default function ProjectDetail({ project, tasks, onBack, onAddTask, onTog
       <div className="detail-header">
         <h1 className="detail-title">{project.name}</h1>
         {project.desc && <p className="detail-desc">{project.desc}</p>}
-        {project.url && (
-          <a className="project-link" href={project.url} target="_blank" rel="noreferrer">
-            {shortUrl(project.url)}
-          </a>
-        )}
+
+        <div className="url-field-wrap">
+          <Input
+            className="font-mono text-sm h-10 rounded-xl bg-[#f5f5f3] border-0 placeholder:text-[#ccc] focus-visible:ring-1 px-[10px]"
+            placeholder="Paste project link..."
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            onBlur={saveUrl}
+            onKeyDown={(e) => e.key === 'Enter' && saveUrl()}
+            type="url"
+          />
+          {url && (
+            <a
+              className="url-open"
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {shortUrl(url)} ↗
+            </a>
+          )}
+        </div>
       </div>
 
       <div>
