@@ -20,11 +20,11 @@ export default function App() {
   const activeTasks = tasks.filter((t) => t.projectId === activeId)
 
   // Projects
-  const saveProject = ({ name, desc }) => {
+  const saveProject = ({ name, desc, url }) => {
     if (form && form.id) {
-      setProjects((ps) => ps.map((p) => p.id === form.id ? { ...p, name, desc } : p))
+      setProjects((ps) => ps.map((p) => p.id === form.id ? { ...p, name, desc, url } : p))
     } else {
-      setProjects((ps) => [...ps, { id: uid(), name, desc, createdAt: Date.now() }])
+      setProjects((ps) => [...ps, { id: uid(), name, desc, url, createdAt: Date.now() }])
     }
     setForm(null)
   }

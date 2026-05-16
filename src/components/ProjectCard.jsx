@@ -9,6 +9,17 @@ export default function ProjectCard({ project, taskCount, onClick, onEdit, onDel
       <div className="card-footer">
         <span className="card-meta">{taskCount} задач</span>
         <div className="card-actions" onClick={(e) => e.stopPropagation()}>
+          {project.url && (
+            <a
+              className="icon-btn"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Открыть ссылку"
+            >
+              ↗
+            </a>
+          )}
           <button className="icon-btn" title="Редактировать" onClick={onEdit}>✎</button>
           <button className="icon-btn danger" title="Удалить" onClick={onDelete}>✕</button>
         </div>
